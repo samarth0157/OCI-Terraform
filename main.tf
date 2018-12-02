@@ -26,5 +26,19 @@ source = "./networking"
     public_cidrs ="${var.public_cidrs}"
     vcn_display_name = "${var.vcn_display_name}"
    compartment_id = "${var.compartment_ocid}"
+
 }
 
+module "compute" {
+
+source = "./compute"
+tenancy_ocid  = "${var.tenancy_ocid}"
+compartment_ocid = "${var.compartment_ocid}"
+instance_count = "${var.instance_count}"
+ssh_public_key = "${var.public_key_path}"
+instance_shape = "${var.instance_shape}"
+subnets   = "${module.networking.public_subnets}"
+subnets_ips = "${module.networking.subnets_ips}"
+instance_image_ocid ="${var.instance_image_ocid}"
+region ="${var.region}"
+}
